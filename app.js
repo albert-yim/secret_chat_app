@@ -14,7 +14,7 @@ io.on("connection", (socket) => {
   console.log("Success connection");
   socket.on("chatting", (data) => {
     console.log(data);
-    io.emit("chatting", `Sure, Hi ) ${data}`);
+    io.emit("chatting", data);
   });
 });
 server.listen(PORT, () => console.log(`server is running ${PORT}`));
