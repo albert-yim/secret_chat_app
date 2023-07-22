@@ -9,6 +9,10 @@
     <script>
       eruda.init();
     </script>
+    <meta
+      name="viewport"
+      content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
+    />
   </head>
 
   <!-- <body style="background: black; height: 5000px; overflow: auto"> -->
@@ -23,23 +27,15 @@
           <li class="sent">
             <span class="profile">
               <span class="user">Sol</span>
-              <img
-                class="image"
-                src="https://placeimg.com/50/50/any"
-                alt="any"
-              />
+              <img class="image" src="chick.jpeg" alt="any" />
             </span>
             <span class="message">Yea hi</span>
             <span class="time">14:20</span>
           </li>
           <li class="received">
             <span class="profile">
-              <span class="user">Sol</span>
-              <img
-                class="image"
-                src="https://placeimg.com/50/50/any"
-                alt="any"
-              />
+              <span class="user">aaSol</span>
+              <img class="image" src="assets/chick.jpeg" alt="any" />
             </span>
             <span class="message">Yea hi</span>
             <span class="time">14:20</span>
@@ -47,8 +43,10 @@
         </ul>
       </div>
       <div class="input-container">
-        <input type="text" class="chatting-input" />
-        <button class="send-button">Send</button>
+        <span>
+          <input type="text" class="chatting-input" />
+          <button class="send-button">Send</button>
+        </span>
       </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
