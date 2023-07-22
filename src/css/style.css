@@ -1,7 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-}
 html,
 body {
   margin: 0;
@@ -60,6 +56,9 @@ body {
   height: 100%;
   flex: 8;
 }
+.chatting-input:focus {
+  outline: none;
+}
 .send-button {
   flex: 1;
   background: #ffeb33;
@@ -97,6 +96,7 @@ body {
   margin: 0 5px;
   width: fit-content;
   max-width: 90%;
+  white-space: pre-line;
 }
 .time {
   font-size: 10px;
