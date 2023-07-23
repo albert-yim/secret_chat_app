@@ -8,6 +8,21 @@ const chatInput = document.querySelector(".chatting-input");
 const sendButton = document.querySelector(".send-button");
 const displayConatiner = document.querySelector(".display-container");
 
+document.addEventListener("gesturestart", function (e) {
+  e.preventDefault();
+  document.body.style.zoom = 0.99;
+});
+
+document.addEventListener("gesturechange", function (e) {
+  e.preventDefault();
+
+  document.body.style.zoom = 0.99;
+});
+document.addEventListener("gestureend", function (e) {
+  e.preventDefault();
+  document.body.style.zoom = 1;
+});
+
 sendButton.addEventListener("click", send);
 
 // Send message with Enter key.
