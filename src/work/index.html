@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width-device-width initial-scale=1" />
+    <title>work</title>
+    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <link rel="stylesheet" href="style.css" />
+    <!--prevent to Zoom on Mobile  -->
+    <meta
+      name="viewport"
+      content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
+    />
+  </head>
+
+  <!-- <body style="background: black; height: 5000px; overflow: auto"> -->
+  <body>
+    <div class="wrapper">
+      <div class="user-container">
+        <label for="nickname">Nickname</label>
+        <input type="text" id="nickname" />
+      </div>
+      <div class="display-container">
+        <ul class="chatting-list">
+          <li class="sent">
+            <span class="profile">
+              <span class="user">Sol</span>
+              <img class="image" src="assets/sol_profile.jpeg" alt="any" />
+            </span>
+            <span class="message">Yea hi</span>
+            <span class="time">14:20</span>
+          </li>
+          <li class="received">
+            <span class="profile">
+              <span class="user">Yang</span>
+              <img class="image" src="assets/yang_profile.jpeg" alt="any" />
+            </span>
+            <span class="message">Yea hi</span>
+            <span class="time">14:20</span>
+          </li>
+        </ul>
+      </div>
+      <div class="input-container">
+        <span>
+          <textarea class="chatting-input"></textarea>
+          <button class="send-button">Send</button>
+        </span>
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/chat.js"></script>
+  </body>
+</html>
