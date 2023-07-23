@@ -46,6 +46,10 @@ function send() {
     name: nickname.value,
     msg: chatInput.value,
   };
+  if (param.msg === "") {
+    chatInput.focus();
+    return;
+  }
   socket.emit("chatting", param);
   chatInput.value = "";
   chatInput.focus();
