@@ -61,6 +61,7 @@ body {
 }
 .send-button {
   flex: 1;
+  height: 100%;
   background: #ffeb33;
   border: none;
   border-radius: 4px;
