@@ -8,13 +8,14 @@ const chatInput = document.querySelector(".chatting-input");
 const sendButton = document.querySelector(".send-button");
 const displayConatiner = document.querySelector(".display-container");
 
-sendButton.addEventListener("click", () => {
-  const param = {
-    name: nickname.value,
-    msg: chatInput.value,
-  };
-  socket.emit("chatting", param);
-});
+sendButton.addEventListener("click", send);
+
+// Send message with Enter key.
+// chatInput.addEventListener("keypress", (event) => {
+//   if (event.keyCode === 13) {
+//     send();
+//   }
+// });
 
 socket.on("chatting", (data) => {
   console.log("data is ");
@@ -25,6 +26,13 @@ socket.on("chatting", (data) => {
   displayConatiner.scrollTo(0, displayConatiner.scrollHeight);
 });
 
+function send() {
+  const param = {
+    name: nickname.value,
+    msg: chatInput.value,
+  };
+  socket.emit("chatting", param);
+}
 function LiModel(name, msg, time) {
   this.name = name;
   this.msg = msg;
