@@ -32,6 +32,8 @@ function send() {
     msg: chatInput.value,
   };
   socket.emit("chatting", param);
+  chatInput.value = "";
+  chatInput.focus();
 }
 function LiModel(name, msg, time) {
   this.name = name;
