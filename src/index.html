@@ -5,10 +5,10 @@
     <meta name="viewport" content="width-device-width initial-scale=1" />
     <title>Document</title>
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-    <link rel="stylesheet" href="css/style.css" />
     <script>
       eruda.init();
     </script>
+    <link rel="stylesheet" href="css/style.css" />
     <!--prevent to Zoom on Mobile  -->
     <meta
       name="viewport"
@@ -16,41 +16,12 @@
     />
   </head>
 
-  <!-- <body style="background: black; height: 5000px; overflow: auto"> -->
   <body>
-    <div class="wrapper">
-      <div class="user-container">
-        <label for="nickname">Nickname</label>
-        <input type="text" id="nickname" />
-      </div>
-      <div class="display-container">
-        <ul class="chatting-list">
-          <li class="sent">
-            <span class="profile">
-              <span class="user">Sol</span>
-              <img class="image" src="assets/chick.jpeg" alt="any" />
-            </span>
-            <span class="message">Yea hi</span>
-            <span class="time">14:20</span>
-          </li>
-          <li class="received">
-            <span class="profile">
-              <span class="user">aaSol</span>
-              <img class="image" src="assets/chick.jpeg" alt="any" />
-            </span>
-            <span class="message">Yea hi</span>
-            <span class="time">14:20</span>
-          </li>
-        </ul>
-      </div>
-      <div class="input-container">
-        <span>
-          <textarea class="chatting-input"></textarea>
-          <button class="send-button">Send</button>
-        </span>
-      </div>
+    <div class="login_wrapper">
+      <input type="text" id="user" />
+      <button class="login-button">Login</button>
     </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="js/chat.js"></script>
+    <script src="../js/login.js"></script>
   </body>
 </html>

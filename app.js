@@ -13,11 +13,17 @@ const PORT = process.env.PORT || 5000;
 
 io.on("connection", (socket) => {
   console.log("Success connection");
+
+  socket.on("login", (data) => {
+    io.emit("login", data);
+    console.log("app.js: connection login");
+  });
+
   socket.on("chatting", (data) => {
-    const { name, msg } = data;
+    const { user, msg } = data;
     console.log(data);
     io.emit("chatting", {
-      name,
+      user,
       msg,
       time: moment(new Date()).format("h:ss A"),
     });

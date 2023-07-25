@@ -1,5 +1,4 @@
 "use strict";
-
 const socket = io();
 
 const nickname = document.querySelector("#nickname");
@@ -35,15 +34,18 @@ sendButton.addEventListener("click", send);
 socket.on("chatting", (data) => {
   console.log("data is ");
   console.log(data);
-  const { name, msg, time } = data;
-  const item = new LiModel(name, msg, time);
+  const { user, msg, time } = data;
+  const item = new LiModel(user, msg, time);
   item.makeLi();
   displayConatiner.scrollTo(0, displayConatiner.scrollHeight);
 });
 
 function send() {
+  const url = new URL(location);
+  const id = url.searchParams.get("id");
   const param = {
-    name: nickname.value,
+    // name: nickname.value,
+    user: id,
     msg: chatInput.value,
   };
   if (param.msg === "") {
@@ -54,6 +56,7 @@ function send() {
   chatInput.value = "";
   chatInput.focus();
 }
+
 function LiModel(name, msg, time) {
   this.name = name;
   this.msg = msg;
