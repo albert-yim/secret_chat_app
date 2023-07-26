@@ -7,10 +7,7 @@ const socketIO = require("socket.io");
 const io = socketIO(server);
 
 const moment = require("moment");
-const mysql = require("mysql2");
-const { MYSQL_INFO } = require("./config.js");
-
-const db = mysql.createConnection(MYSQL_INFO);
+const { db } = require("./config.js");
 
 db.connect();
 app.use(express.static(path.join(__dirname, "src")));
@@ -26,25 +23,47 @@ io.on("connection", (socket) => {
 
   socket.on("chatting", (data) => {
     const { user, msg } = data;
-    console.log(data);
-    db.query(
-      `
+    addMessageOnDB(user, msg);
+    emitMessageToOther(user, msg);
+  });
+});
+
+function addMessageOnDB(user, msg) {
+  db.query(
+    `
         INSERT INTO message (content, created, user)
             VALUES(?, NOW(), ?)
       `,
-      [msg, user],
-      (error, result) => {
-        if (error) {
-          throw error;
-        }
-        console.log(result);
-      },
-    );
-    io.emit("chatting", {
-      user,
-      msg,
-      time: moment(new Date()).format("h:ss A"),
-    });
-  });
-});
+    [msg, user],
+    (error, result) => {
+      if (error) {
+        throw error;
+      }
+      console.log(result);
+    },
+  );
+}
+
+function emitMessageToOther(user, msg) {
+  db.query(
+    `
+SELECT * from user WHERE id=?
+      `,
+    [user],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+        throw error;
+      }
+      console.log(result);
+      console.log(result[0].name);
+      io.emit("chatting", {
+        user,
+        userName: result[0].name,
+        msg,
+        time: moment(new Date()).format("h:ss A"),
+      });
+    },
+  );
+}
 server.listen(PORT, () => console.log(`server is running ${PORT}`));

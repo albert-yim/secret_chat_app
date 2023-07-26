@@ -7,6 +7,8 @@ const chatInput = document.querySelector(".chatting-input");
 const sendButton = document.querySelector(".send-button");
 const displayConatiner = document.querySelector(".display-container");
 
+const url = new URL(location);
+const userId = url.searchParams.get("id");
 document.addEventListener("gesturestart", function (e) {
   e.preventDefault();
   document.body.style.zoom = 0.99;
@@ -34,18 +36,16 @@ sendButton.addEventListener("click", send);
 socket.on("chatting", (data) => {
   console.log("data is ");
   console.log(data);
-  const { user, msg, time } = data;
-  const item = new LiModel(user, msg, time);
+  const { user, userName, msg, time } = data;
+  const item = new LiModel(user, userName, msg, time);
   item.makeLi();
   displayConatiner.scrollTo(0, displayConatiner.scrollHeight);
 });
 
 function send() {
-  const url = new URL(location);
-  const id = url.searchParams.get("id");
   const param = {
     // name: nickname.value,
-    user: id,
+    user: userId,
     msg: chatInput.value,
   };
   if (param.msg === "") {
@@ -57,14 +57,14 @@ function send() {
   chatInput.focus();
 }
 
-function LiModel(name, msg, time) {
+function LiModel(id, name, msg, time) {
   this.name = name;
   this.msg = msg;
   this.time = time;
 
   this.makeLi = () => {
     const li = document.createElement("li");
-    li.classList.add(nickname.value === this.name ? "sent" : "received");
+    li.classList.add(userId === id ? "sent" : "received");
     const dom = `
             <span class="profile">
               <span class="user">${this.name}</span>
