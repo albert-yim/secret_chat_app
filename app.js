@@ -9,7 +9,6 @@ const io = socketIO(server);
 const moment = require("moment");
 const { db } = require("./config.js");
 
-db.connect();
 app.use(express.static(path.join(__dirname, "src")));
 const PORT = process.env.PORT || 5000;
 

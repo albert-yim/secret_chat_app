@@ -1,7 +1,7 @@
 "use strict";
 const socket = io();
 
-const nickname = document.querySelector("#nickname");
+const enterSend = document.querySelector("#enterSend");
 const chatList = document.querySelector(".chatting-list");
 const chatInput = document.querySelector(".chatting-input");
 const sendButton = document.querySelector(".send-button");
@@ -26,16 +26,15 @@ document.addEventListener("gestureend", function (e) {
 
 sendButton.addEventListener("click", send);
 
-// Send message with Enter key.
-// chatInput.addEventListener("keypress", (event) => {
-//   if (event.keyCode === 13) {
-//     send();
-//   }
-// });
+// Send message with Enter key. When checkbox is checked
+chatInput.addEventListener("keypress", (event) => {
+  if (!event.shiftKey && event.keyCode === 13 && enterSend.checked) {
+    send();
+    event.preventDefault();
+  }
+});
 
 socket.on("chatting", (data) => {
-  console.log("data is ");
-  console.log(data);
   const { user, userName, msg, time } = data;
   const item = new LiModel(user, userName, msg, time);
   item.makeLi();
@@ -44,7 +43,6 @@ socket.on("chatting", (data) => {
 
 function send() {
   const param = {
-    // name: nickname.value,
     user: userId,
     msg: chatInput.value,
   };
@@ -61,16 +59,17 @@ function LiModel(id, name, msg, time) {
   this.name = name;
   this.msg = msg;
   this.time = time;
-
+  this.id = id;
+  id === "1" ? "assets/sol_profile.jpeg" : "assets/yang_profile.jpeg";
   this.makeLi = () => {
     const li = document.createElement("li");
-    li.classList.add(userId === id ? "sent" : "received");
+    li.classList.add(userId === this.id ? "sent" : "received");
     const dom = `
             <span class="profile">
               <span class="user">${this.name}</span>
               <img
                 class="image"
-                src="https://placeimg.com/50/50/any"
+                src=${this.img}
                 alt="any"
               />
             </span>
