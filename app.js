@@ -9,12 +9,29 @@ const io = socketIO(server);
 const moment = require("moment");
 const { db } = require("./config.js");
 
-app.use(express.static(path.join(__dirname, "src")));
 const PORT = process.env.PORT || 5000;
 
-io.on("connection", (socket) => {
-  console.log("Success connection");
+app.use(express.static(path.join(__dirname, "src")));
 
+// io.of("/work").adapter.on("join-room", (room, id) => {
+//   console.log(`socket ${id} has joined room: ${room}`);
+// });
+// SELECT content, DATE_FORMAT(created,%y-%m-%d) as created, id, user, name FROM message JOIN user ON message.user = user.id
+io.on("connection", (socket) => {
+  socket.on("joinChat", () => {
+    db.query(
+      `
+         SELECT content, DATE_FORMAT(created,'%y-%m-%d %H:%i') as created, user.id, user, name FROM message JOIN user ON message.user = user.id 
+    `,
+      [],
+      (error, result) => {
+        if (error) {
+          throw error;
+        }
+        io.to(socket.id).emit("getMessages", result);
+      },
+    );
+  });
   socket.on("login", (data) => {
     io.emit("login", data);
     console.log("app.js: connection login");

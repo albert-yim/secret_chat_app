@@ -6,7 +6,6 @@ const chatList = document.querySelector(".chatting-list");
 const chatInput = document.querySelector(".chatting-input");
 const sendButton = document.querySelector(".send-button");
 const displayConatiner = document.querySelector(".display-container");
-
 const url = new URL(location);
 const userId = url.searchParams.get("id");
 document.addEventListener("gesturestart", function (e) {
@@ -33,7 +32,16 @@ chatInput.addEventListener("keypress", (event) => {
     event.preventDefault();
   }
 });
-
+console.log(socket);
+socket.emit("joinChat");
+socket.on("getMessages", (data) => {
+  data.map((message) => {
+    const { content, created, id, user, name } = message;
+    const item = new LiModel(user, name, content, created);
+    item.makeLi();
+  });
+  displayConatiner.scrollTo(0, displayConatiner.scrollHeight);
+});
 socket.on("chatting", (data) => {
   const { user, userName, msg, time } = data;
   const item = new LiModel(user, userName, msg, time);
@@ -60,10 +68,11 @@ function LiModel(id, name, msg, time) {
   this.msg = msg;
   this.time = time;
   this.id = id;
-  id === "1" ? "assets/sol_profile.jpeg" : "assets/yang_profile.jpeg";
+  this.img =
+    id === "1" ? "assets/sol_profile.jpeg" : "assets/yang_profile.jpeg";
   this.makeLi = () => {
     const li = document.createElement("li");
-    li.classList.add(userId === this.id ? "sent" : "received");
+    li.classList.add(userId == this.id ? "sent" : "received");
     const dom = `
             <span class="profile">
               <span class="user">${this.name}</span>
