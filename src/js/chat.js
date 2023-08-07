@@ -32,9 +32,15 @@ chatInput.addEventListener("keypress", (event) => {
     event.preventDefault();
   }
 });
-console.log(socket);
 socket.emit("joinChat");
 socket.on("getMessages", (data) => {
+  var currentDate = new Date(data[0].created || undefined);
+  // console.log(currentDate.getDate());
+  console.log(currentDate);
+  console.log(currentDate.getDate());
+  console.log(currentDate.getUTCDate());
+  console.log(currentDate.getTime());
+  console.log(currentDate.toString());
   data.map((message) => {
     const { content, created, id, user, name } = message;
     const item = new LiModel(user, name, content, created);

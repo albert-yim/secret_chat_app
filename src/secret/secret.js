@@ -1,6 +1,5 @@
 "use strict";
 const socket = io();
-
 const chatList = document.querySelector(".chatting-list");
 const chatInput = document.querySelector(".chatting-input");
 const displayConatiner = document.querySelector(".display-container");
@@ -20,7 +19,8 @@ document.addEventListener("gestureend", function (e) {
   e.preventDefault();
   document.body.style.zoom = 1;
 });
-
+// Focus textArea so that user can type the message without click textArea
+chatInput.focus();
 // Send message with Enter key. When checkbox is checked
 chatInput.addEventListener("keypress", (event) => {
   if (!event.shiftKey && event.keyCode === 13) {
