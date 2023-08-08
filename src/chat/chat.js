@@ -75,7 +75,7 @@ function LiModel(id, name, msg, time) {
   this.time = time;
   this.id = id;
   this.img =
-    id === "1" ? "assets/sol_profile.jpeg" : "assets/yang_profile.jpeg";
+    id === "1" ? "assets/user1_profile.jpeg" : "assets/user2_profile.jpeg";
   this.makeLi = () => {
     const li = document.createElement("li");
     li.classList.add(userId == this.id ? "sent" : "received");

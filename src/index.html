@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width-device-width initial-scale=1" />
-    <title>Document</title>
+    <title>Login</title>
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
     <script>
       eruda.init();
     </script>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!--prevent to Zoom on Mobile  -->
     <meta
       name="viewport"
@@ -17,9 +17,19 @@
   </head>
 
   <body>
-    <div class="login_wrapper">
-      <input type="text" id="user" />
-      <button class="login-button">Login</button>
+    <div class="login-wrapper">
+      <h2>Click to login</h2>
+      <!-- <input type="text" id="user" /> -->
+      <div class="login-button-wrapper">
+        <button class="login-button">
+          <img src="assets/user1_profile.jpeg" alt="login button" />
+          <span class="user-name">Sol</span>
+        </button>
+        <button class="login-button">
+          <img src="assets/user2_profile.jpeg" alt="login button" />
+          <span class="user-name">Chanyang</span>
+        </button>
+      </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="../js/login.js"></script>
