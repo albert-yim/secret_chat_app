@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, "src")));
 // SELECT content, DATE_FORMAT(created,%y-%m-%d) as created, id, user, name FROM message JOIN user ON message.user = user.id
 io.on("connection", (socket) => {
   socket.on("joinChat", () => {
+    console.log(`join chat ${socket.id}!!`);
     db.query(
       `
          SELECT content, DATE_FORMAT(created,'%y-%m-%d %H:%i') as created, user.id, user, name FROM message JOIN user ON message.user = user.id 
