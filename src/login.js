@@ -1,9 +1,8 @@
 "use strict";
 const socket = io();
 
-const userInput = document.querySelector("#user");
-const loginButton = document.querySelector(".login-button");
-
+const user1Btn = document.querySelector("#user1-login-button");
+const user2Btn = document.querySelector("#user2-login-button");
 socket.on("login", (data) => {
   console.log("login info:");
   console.log(location.search);
@@ -14,8 +13,13 @@ socket.on("login", (data) => {
   console.log(data);
 });
 
-loginButton.addEventListener("click", () => {
-  const name = userInput.value;
-  socket.emit("login", name);
-  console.log("login button clicked");
-});
+user1Btn.addEventListener("click", loginToChat);
+user2Btn.addEventListener("click", loginToSecret);
+
+function loginToChat() {
+  window.location.replace("/chat?id=1");
+}
+
+function loginToSecret() {
+  window.location.replace("/secret?id=2");
+}
